@@ -5,3 +5,6 @@
 game
 _old
 *vscod
+bin
+bin-int
+*Makefile

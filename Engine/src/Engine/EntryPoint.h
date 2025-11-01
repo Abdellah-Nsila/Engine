@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Application.h"
-#include "Log.h"
+#include "Engine/Application.h"
+#include "Engine/Log.h"
 
 #include <spdlog/spdlog.h>
 

@@ -10,6 +10,11 @@ workspace "Engine"
 
 outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+
+include "Engine/vendor/GLFW"
+
 project "Engine"
 	location "Engine"
 	kind "SharedLib"
@@ -31,7 +36,8 @@ project "Engine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
 	}
 
 	filter "system:linux"
@@ -51,6 +57,7 @@ project "Engine"
 		-- typical Linux libs for OpenGL
 		links
 		{
+			"GLFW",
 			"GL",
 			"pthread",
 			"dl",

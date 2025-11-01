@@ -18,6 +18,10 @@ project "Engine"
 	targetdir ("bin/" .. outputDir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputDir .. "/%{prj.name}")
 
+	--* Precompiled Header
+	pchheader "enginepch.h"
+	pchsource "Engine/src/enginepch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",

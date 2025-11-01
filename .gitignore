@@ -1,10 +1,7 @@
-*build
+/bin
+/bin-int
+*Makefile
 *.d
 *.gch
 *.o
-game
-_old
-*vscod
-bin
-bin-int
-*Makefile
+/vscode

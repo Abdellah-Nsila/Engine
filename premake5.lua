@@ -11,7 +11,9 @@ workspace "Engine"
 outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
+IncludeDir["ENGINE"] = "Engine/src"
 IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+IncludeDir["spdlog"] = "Engine/vendor/spdlog/include"
 
 include "Engine/vendor/GLFW"
 
@@ -30,14 +32,19 @@ project "Engine"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs
 	{
-		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.ENGINE}",
+		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW"
 	}
 
 	filter "system:linux"
@@ -47,21 +54,18 @@ project "Engine"
 
 		defines
 		{
-			"ENGINE_PLATFORM_LINUX"
+			"ENGINE_PLATFORM_LINUX",
+			"ENGINE_ENABLE_ASSERTS"
 		}
 		 -- needed for shared libs on Linux
 		buildoptions
 		{
 			"-fPIC"
 		}
-		-- typical Linux libs for OpenGL
 		links
 		{
-			"GLFW",
-			"GL",
-			"pthread",
-			"dl",
-			"X11"
+			"GLFW", -- glfw premake target
+			"GL", "X11", "Xrandr", "Xinerama", "Xcursor", "Xfixes", "pthread", "dl" -- typical Linux libs for OpenGL
 		}
 		postbuildcommands
 		{
@@ -104,8 +108,9 @@ project "Sandbox"
 
 	includedirs
 	{
-		"Engine/vendor/spdlog/include",
-		"Engine/src"
+		"%{IncludeDir.ENGINE}",
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.GLFW}",
 	}
 
 	links
@@ -126,14 +131,6 @@ project "Sandbox"
 		buildoptions
 		{
 			"-fPIC"
-		}
-		-- typical Linux libs for OpenGL
-		links
-		{
-			"GL",
-			"pthread",
-			"dl",
-			"X11"
 		}
 
 	filter "configurations:Debug"

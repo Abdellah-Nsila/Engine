@@ -1,6 +1,8 @@
 #pragma once
 
+#include "enginepch.h"
 #include "Engine/Core.h"
+#include "Engine/Window.h"
 
 namespace Engine
 {
@@ -8,11 +10,12 @@ namespace Engine
 	class Application
 	{
 		public:
-			Application(/* args */);
+			Application();
 			virtual ~Application();
 			void	Run();
 		private:
-			/* data */
+			std::unique_ptr<Window> m_Window;
+			bool					m_Running = true;
 	};
 
 	// To be defined in CLIENT

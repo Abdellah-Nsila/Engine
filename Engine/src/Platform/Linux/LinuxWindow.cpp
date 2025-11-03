@@ -50,7 +50,7 @@ namespace Engine
 		this->SetVSync(true);
 
 		// Set GLFW callbacks
-		glfwSetWindowSizeCallback(this->m_Window, 
+		glfwSetWindowSizeCallback(this->m_Window,
 			[](GLFWwindow* window, int width, int height)
 			{
 				// Get Window data and update them
@@ -64,7 +64,7 @@ namespace Engine
 			}
 		);
 
-		glfwSetWindowCloseCallback(this->m_Window, 
+		glfwSetWindowCloseCallback(this->m_Window,
 			[](GLFWwindow* window)
 			{
 				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -74,7 +74,7 @@ namespace Engine
 			}
 		);
 
-		glfwSetKeyCallback(this->m_Window, 
+		glfwSetKeyCallback(this->m_Window,
 			[](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
 				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -105,7 +105,7 @@ namespace Engine
 			}
 		);
 
-		glfwSetMouseButtonCallback(this->m_Window, 
+		glfwSetMouseButtonCallback(this->m_Window,
 			[](GLFWwindow* window, int button, int action, int mods)
 			{
 				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -130,7 +130,7 @@ namespace Engine
 			}
 		);
 
-		glfwSetScrollCallback(this->m_Window, 
+		glfwSetScrollCallback(this->m_Window,
 			[](GLFWwindow* window, double xOffset, double yOffset)
 			{
 				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -140,7 +140,7 @@ namespace Engine
 			}
 		);
 
-		glfwSetCursorPosCallback(this->m_Window, 
+		glfwSetCursorPosCallback(this->m_Window,
 			[](GLFWwindow* window, double xPos, double yPos)
 			{
 				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);

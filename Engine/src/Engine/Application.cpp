@@ -35,6 +35,14 @@ namespace Engine
 
 	void	Application::OnEvent(Event& e)
 	{
-		ENGINE_CORE_INFO(e.ToString());
+		EventDispatcher	dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnCloseWindow));
+		ENGINE_CORE_TRACE(e.ToString());
+	}
+
+	bool	Application::OnCloseWindow(WindowCloseEvent& e)
+	{
+		this->m_Running = false;
+		return true;
 	}
 }

@@ -10,6 +10,11 @@ namespace Engine
 
 	static bool	s_GLFWInitialized = false;
 
+	static	void	GLFWErrorCallback(int error_code, const char* description)
+	{
+		ENGINE_CORE_ERROR("GLFW Error ({0}) : {1}", error_code, description);
+	}
+
 	Window*	Window::Create(const WindowProps& props)
 	{
 		return (new LinuxWindow(props));
@@ -32,7 +37,7 @@ namespace Engine
 		this->m_Data.Height = props.Height;
 
 		ENGINE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
-
+		glfwSetErrorCallback(GLFWErrorCallback);
 		if (!s_GLFWInitialized)
 		{
 			int	success = glfwInit();

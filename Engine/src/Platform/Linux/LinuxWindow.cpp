@@ -1,6 +1,10 @@
 #include "LinuxWindow.h"
 #include "Engine/Log.h"
 
+#include "Engine/Events/ApplicationEvent.h"
+#include "Engine/Events/KeyEvent.h"
+#include "Engine/Events/MouseEvent.h"
+
 namespace Engine
 {
 
@@ -39,6 +43,107 @@ namespace Engine
 		glfwMakeContextCurrent(this->m_Window);
 		glfwSetWindowUserPointer(this->m_Window, &this->m_Data);
 		this->SetVSync(true);
+
+		// Set GLFW callbacks
+		glfwSetWindowSizeCallback(this->m_Window, 
+			[](GLFWwindow* window, int width, int height)
+			{
+				// Get Window data and update them
+				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
+				data.Width = width;
+				data.Height = height;
+
+				// Create an Event and dispatch it
+				WindowResizeEvent	event(width, height);
+				data.EventCallback(event);
+			}
+		);
+
+		glfwSetWindowCloseCallback(this->m_Window, 
+			[](GLFWwindow* window)
+			{
+				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				WindowCloseEvent	event;
+				data.EventCallback(event);
+			}
+		);
+
+		glfwSetKeyCallback(this->m_Window, 
+			[](GLFWwindow* window, int key, int scancode, int action, int mods)
+			{
+				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						KeyPressedEvent	event(key, 0);
+						data.EventCallback(event);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						KeyReleasedEvent	event(key, 0);
+						data.EventCallback(event);
+						break;
+					}
+					case GLFW_REPEAT:
+					{
+						KeyPressedEvent	event(key, 1);
+						data.EventCallback(event);
+						break;
+					}
+					default:
+						break;
+				}
+			}
+		);
+
+		glfwSetMouseButtonCallback(this->m_Window, 
+			[](GLFWwindow* window, int button, int action, int mods)
+			{
+				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						MouseButtonPressedEvent	event(button);
+						data.EventCallback(event);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						MouseButtonReleasedEvent	event(button);
+						data.EventCallback(event);
+						break;
+					}
+					default:
+						break;
+				}
+			}
+		);
+
+		glfwSetScrollCallback(this->m_Window, 
+			[](GLFWwindow* window, double xOffset, double yOffset)
+			{
+				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				MouseScrolledEvent	event((float)xOffset, (float)yOffset);
+				data.EventCallback(event);
+			}
+		);
+
+		glfwSetCursorPosCallback(this->m_Window, 
+			[](GLFWwindow* window, double xPos, double yPos)
+			{
+				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				MouseMovedEvent	event((float)xPos, (float)yPos);
+				data.EventCallback(event);
+			}
+		);
 	}
 
 	void	LinuxWindow::Shutdown()

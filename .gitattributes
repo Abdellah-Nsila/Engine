@@ -1,5 +1,5 @@
 *sh		linguist-language=Shell
-*bash		linguist-language=Shell
+*bash	linguist-language=Shell
 
 *.glsl	linguist-language=GLSL
 *.vert	linguist-language=GLSL

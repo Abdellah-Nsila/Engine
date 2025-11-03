@@ -13,6 +13,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Engine/Log.h"
+
 #include <GLFW/glfw3.h>
 
 #ifdef ENGINE_PLATFORM_LINUX

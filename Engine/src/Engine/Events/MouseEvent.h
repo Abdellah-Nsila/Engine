@@ -16,7 +16,7 @@ namespace Engine
 			std::string	ToString() const override
 			{
 				std::stringstream	ss;
-				ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
+				ss << "MouseMovedEvent: " << this->m_MouseX << ", " << this->m_MouseY;
 				return ss.str();
 			}
 			EVENT_CLASS_TYPE(MouseMoved)
@@ -36,7 +36,7 @@ namespace Engine
 			std::string	ToString() const override
 			{
 				std::stringstream	ss;
-				ss << "MouseScrolledEvent: " << m_XOffset << ", " << m_YOffset;
+				ss << "MouseScrolledEvent: " << this->m_XOffset << ", " << this->m_YOffset;
 				return ss.str();
 			}
 			EVENT_CLASS_TYPE(MouseScrolled)
@@ -50,7 +50,7 @@ namespace Engine
 	class MouseButtonEvent : public Event
 	{
 		public:
-			inline float	GetMouseButton() const { return this->m_Button; };
+			inline int	GetMouseButton() const { return this->m_Button; };
 			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 		protected:
 			MouseButtonEvent(int button) : m_Button(button) {};
@@ -61,35 +61,28 @@ namespace Engine
 	{
 		public:
 			MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {};
-			inline float	GetMouseButton() const { return this->m_Button; };
+			inline int	GetMouseButton() const { return this->m_Button; };
 			std::string	ToString() const override
 			{
 				std::stringstream	ss;
-				ss << "MouseButtonPressedEvent: " << m_Button;
+				ss << "MouseButtonPressedEvent: " << this->m_Button;
 				return ss.str();
 			}
 			EVENT_CLASS_TYPE(MouseButtonPressed)
-		protected:
-			int	m_Button;
 	};
 
 	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 		public:
 			MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {};
-			inline float	GetMouseButton() const { return this->m_Button; };
+			inline int	GetMouseButton() const { return this->m_Button; };
 			std::string	ToString() const override
 			{
 				std::stringstream	ss;
-				ss << "MouseButtonReleasedEvent: " << m_Button;
+				ss << "MouseButtonReleasedEvent: " << this->m_Button;
 				return ss.str();
 			}
 			EVENT_CLASS_TYPE(MouseButtonReleased)
-		protected:
-			int	m_Button;
 	};
 
-
-	
-	
 }

@@ -1,0 +1,13 @@
+*sh		linguist-language=Shell
+*bash	linguist-language=Shell
+
+*.glsl	linguist-language=GLSL
+*.vert	linguist-language=GLSL
+*.frag	linguist-language=GLSL
+
+*.c		linguist-language=C
+*.h		linguist-language=C
+*.cpp	linguist-language=C++
+*.hpp	linguist-language=C++
+
+*.lua	linguist-language=Lua

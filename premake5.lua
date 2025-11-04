@@ -15,9 +15,11 @@ IncludeDir["ENGINE"] = "Engine/src"
 IncludeDir["spdlog"] = "Engine/vendor/spdlog/include"
 IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
 IncludeDir["Glad"] = "Engine/vendor/Glad/include"
+IncludeDir["ImGui"] = "Engine/vendor/imgui"
 
 include "Engine/vendor/GLFW"
 include "Engine/vendor/Glad"
+include "Engine/vendor/imgui"
 
 project "Engine"
 	location "Engine"
@@ -42,7 +44,8 @@ project "Engine"
 		"%{IncludeDir.ENGINE}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	filter "system:linux"
@@ -63,7 +66,7 @@ project "Engine"
 		}
 		links
 		{
-			"GLFW", "Glad", -- premake targets
+			"GLFW", "Glad", "ImGui", -- premake targets
 			"GL", "X11", "Xrandr", "Xinerama", "Xcursor", "Xfixes", "pthread", "dl" -- typical Linux libs for OpenGL
 		}
 		postbuildcommands

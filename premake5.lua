@@ -12,10 +12,12 @@ outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["ENGINE"] = "Engine/src"
-IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
 IncludeDir["spdlog"] = "Engine/vendor/spdlog/include"
+IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+IncludeDir["Glad"] = "Engine/vendor/Glad/include"
 
 include "Engine/vendor/GLFW"
+include "Engine/vendor/Glad"
 
 project "Engine"
 	location "Engine"
@@ -39,12 +41,8 @@ project "Engine"
 	{
 		"%{IncludeDir.ENGINE}",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.GLFW}"
-	}
-
-	links
-	{
-		"GLFW"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	filter "system:linux"
@@ -55,7 +53,8 @@ project "Engine"
 		defines
 		{
 			"ENGINE_PLATFORM_LINUX",
-			"ENGINE_ENABLE_ASSERTS"
+			"ENGINE_ENABLE_ASSERTS",
+			"GLFW_INCLUDE_NONE"
 		}
 		 -- needed for shared libs on Linux
 		buildoptions
@@ -64,7 +63,7 @@ project "Engine"
 		}
 		links
 		{
-			"GLFW", -- glfw premake target
+			"GLFW", "Glad", -- premake targets
 			"GL", "X11", "Xrandr", "Xinerama", "Xcursor", "Xfixes", "pthread", "dl" -- typical Linux libs for OpenGL
 		}
 		postbuildcommands

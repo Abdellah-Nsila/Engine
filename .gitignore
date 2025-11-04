@@ -1,7 +1,10 @@
 /bin
 /bin-int
+*bin
+*bin-int
 *Makefile
 *.d
 *.gch
 *.o
-/vscode
+/.vscode
+*.vscode

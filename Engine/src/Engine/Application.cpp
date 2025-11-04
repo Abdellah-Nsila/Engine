@@ -2,6 +2,8 @@
 #include "Engine/Application.h"
 #include "Engine/Events/ApplicationEvent.h"
 
+#include <glad/glad.h>
+
 namespace Engine
 {
 
@@ -14,7 +16,7 @@ namespace Engine
 		this->m_Window = std::unique_ptr<Window>(Window::Create());
 		// OnEvent is a member function, which means it implicitly takes a hidden this pointer — so its type is:
 		// void (Application::*)(Event&)
-		this->m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+		this->m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));;
 	}
 	
 	Application::~Application()

@@ -5,6 +5,8 @@
 #include "Engine/Events/KeyEvent.h"
 #include "Engine/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace Engine
 {
 
@@ -46,6 +48,8 @@ namespace Engine
 
 		this->m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(this->m_Window);
+		int	status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		ENGINE_CORE_ASSERT(status, "Failed to Initialize Glad!");
 		glfwSetWindowUserPointer(this->m_Window, &this->m_Data);
 		this->SetVSync(true);
 

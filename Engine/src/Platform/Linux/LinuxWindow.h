@@ -3,6 +3,8 @@
 #include "enginepch.h"
 #include "Engine/Window.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Engine
 {
 	class LinuxWindow : public Window

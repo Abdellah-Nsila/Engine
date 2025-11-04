@@ -15,8 +15,6 @@
 
 #include "Engine/Log.h"
 
-#include <GLFW/glfw3.h>
-
 #ifdef ENGINE_PLATFORM_LINUX
 	#include <unistd.h>
 #endif

@@ -116,6 +116,7 @@ project "Sandbox"
 		"%{IncludeDir.ENGINE}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links

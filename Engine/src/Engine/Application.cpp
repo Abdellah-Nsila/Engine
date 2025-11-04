@@ -11,8 +11,13 @@ namespace Engine
 	// and produces a callable that matches the needed function signature.
 	#define BIND_EVENT_FN(x)	std::bind(&x, this, std::placeholders::_1)
 
+	Application*	Application::s_Instance = nullptr;
+
 	Application::Application()
 	{
+		ENGINE_CORE_ASSERT(!s_Instance, "Application already exists!")
+		s_Instance = this;
+
 		this->m_Window = std::unique_ptr<Window>(Window::Create());
 		// OnEvent is a member function, which means it implicitly takes a hidden this pointer — so its type is:
 		// void (Application::*)(Event&)
@@ -63,11 +68,13 @@ namespace Engine
 	void	Application::PushLayer(Layer* layer)
 	{
 		this->m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void	Application::PushOverlay(Layer* layer)
 	{
 		this->m_LayerStack.PushOverLay(layer);
+		layer->OnAttach();
 	}
 
 

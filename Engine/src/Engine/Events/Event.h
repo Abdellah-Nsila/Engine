@@ -41,6 +41,7 @@ namespace Engine
 			{
 				return (this->GetCategoryFlags() & category);
 			}
+			inline bool	IsHandled() const { return this->m_Handled; };
 		protected:
 			bool m_Handled = false;
 	};

@@ -23,12 +23,14 @@ namespace Engine
 
 	void	Application::Run()
 	{
-		// WindowResizeEvent	e(1080, 720);
-		// ENGINE_TRACE(e.ToString());
 		while (this->m_Running)
 		{
 			glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			for (Layer* layer : this->m_LayerStack)
+				layer->OnUpdate();
+
 			this->m_Window->OnUpdate();
 		}
 	}
@@ -46,11 +48,28 @@ namespace Engine
 		// the role of dispatcher is just take the target class type event and matched with the member event then execute the function provided for this event
 		// We use BIND_EVENT_FN because if you want to use a member function class in another class we need to bind it early by its own this (self object class)
 		EventDispatcher	dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnCloseWindow));
-		ENGINE_CORE_TRACE(e.ToString());
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+
+		for (auto	it = this->m_LayerStack.end(); it != this->m_LayerStack.begin(); )
+		{
+			(*--it)->OnEvent(e);
+			if (e.IsHandled())
+				break ;
+		}
 	}
 
-	bool	Application::OnCloseWindow(WindowCloseEvent& e)
+	void	Application::PushLayer(Layer* layer)
+	{
+		this->m_LayerStack.PushLayer(layer);
+	}
+
+	void	Application::PushOverlay(Layer* layer)
+	{
+		this->m_LayerStack.PushOverLay(layer);
+	}
+
+
+	bool	Application::OnWindowClose(WindowCloseEvent& e)
 	{
 		this->m_Running = false;
 		return true;

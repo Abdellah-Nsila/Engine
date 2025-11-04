@@ -75,14 +75,17 @@ project "Engine"
 
 	filter "configurations:Debug"
 		defines "ENGINE_DEBUG"
+		buildoptions { "-g" } -- Debug info + strict warnings optional (, "-Wall", "-Wextra", "-Wpedantic")
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "ENGINE_RELEASE"
+		buildoptions { "-O2", "-DNDEBUG" } -- Normal optimization
 		optimize "On"
 	
 	filter "configurations:Dist"
 		defines "ENGINE_DIST"
+		buildoptions { "-O3", "-DNDEBUG" } -- Max optimization
 		optimize "On"
 
 
@@ -135,14 +138,17 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "ENGINE_DEBUG"
+		buildoptions { "-g" } -- Debug info + strict warnings optional (, "-Wall", "-Wextra", "-Wpedantic")
 		symbols "On"
 	
 	filter "configurations:Release"
 		defines "ENGINE_RELEASE"
+		buildoptions { "-O2", "-DNDEBUG" } -- Normal optimization
 		optimize "On"
 	
 	filter "configurations:Dist"
 		defines "ENGINE_DIST"
+		buildoptions { "-O3", "-DNDEBUG" } -- Max optimization
 		optimize "On"
 
 

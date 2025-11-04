@@ -4,6 +4,7 @@
 
 #include "Engine/Core.h"
 #include "Engine/Application.h"
+#include "Engine/Layer.h"
 #include "Engine/Log.h"
 
 // --------------------- Entry Point ---------------------

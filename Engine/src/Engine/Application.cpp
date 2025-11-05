@@ -1,4 +1,5 @@
 #include "enginepch.h"
+#include "Engine/Core.h"
 #include "Engine/Application.h"
 #include "Engine/Events/ApplicationEvent.h"
 
@@ -6,10 +7,6 @@
 
 namespace Engine
 {
-
-	// std::bind “binds” a member function with an instance (the this pointer)
-	// and produces a callable that matches the needed function signature.
-	#define BIND_EVENT_FN(x)	std::bind(&x, this, std::placeholders::_1)
 
 	Application*	Application::s_Instance = nullptr;
 

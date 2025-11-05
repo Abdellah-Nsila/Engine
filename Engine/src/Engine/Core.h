@@ -19,3 +19,7 @@
 #endif
 
 #define BIT(x) (1 << x)
+
+// std::bind “binds” a member function with an instance (the this pointer)
+// and produces a callable that matches the needed function signature.
+#define BIND_EVENT_FN(x)	std::bind(&x, this, std::placeholders::_1)

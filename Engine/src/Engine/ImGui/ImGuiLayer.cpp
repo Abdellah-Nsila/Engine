@@ -5,7 +5,10 @@
 
 #include "imgui.h"
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
+
+//TODO: Temp
 #include <GLFW/glfw3.h>
+#include "glad/glad.h"
 
 namespace Engine
 {
@@ -128,7 +131,9 @@ namespace Engine
 	bool	ImGuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
 	{
 		ImGuiIO&	io = ImGui::GetIO();
-		// io.;
+		io.DisplaySize = ImVec2(e.GetWidth(), e.GetHeight());
+		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+		glViewport(0, 0, e.GetWidth(), e.GetHeight());
 		
 		return (false);
 	}

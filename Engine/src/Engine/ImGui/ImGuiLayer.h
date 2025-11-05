@@ -1,5 +1,8 @@
 #pragma once
 
+#include "enginepch.h"
+#include "imgui.h"
+
 #include "Engine/Layer.h"
 #include "Engine/Events/Event.h"
 #include "Engine/Events/ApplicationEvent.h"
@@ -18,6 +21,8 @@ namespace Engine
 			void	OnDetach();
 			void	OnUpdate();
 			void	OnEvent(Event& event);
+
+			static ImGuiKey	MapToImGuiKey(int keycode);
 		private:
 			bool	OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
 			bool	OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
@@ -25,7 +30,7 @@ namespace Engine
 			bool	OnMouseScrolledEvent(MouseScrolledEvent& e);
 			bool	OnKeyPressedEvent(KeyPressedEvent& e);
 			bool	OnKeyReleasedEvent(KeyReleasedEvent& e);
-			// bool	OnKeyTypedEvent(KeyTypedEvent& e);
+			bool	OnKeyTypedEvent(KeyTypedEvent& e);
 			bool	OnWindowResizeEvent(WindowResizeEvent& e);
 		private:
 			float	m_Time = 0.0f;

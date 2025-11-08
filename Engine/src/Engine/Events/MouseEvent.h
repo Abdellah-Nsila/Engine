@@ -31,8 +31,8 @@ namespace Engine
 	{
 		public:
 			MouseScrolledEvent(float x, float y) : m_XOffset(x), m_YOffset(y) {};
-			inline float	GetX() const { return this->m_XOffset; };
-			inline float	GetY() const { return this->m_YOffset; };
+			inline float	GetXOffset() const { return this->m_XOffset; };
+			inline float	GetYOffset() const { return this->m_YOffset; };
 			std::string	ToString() const override
 			{
 				std::stringstream	ss;

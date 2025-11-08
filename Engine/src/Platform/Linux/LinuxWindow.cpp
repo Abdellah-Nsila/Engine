@@ -109,6 +109,15 @@ namespace Engine
 			}
 		);
 
+		glfwSetCharCallback(this->m_Window,
+			[](GLFWwindow* window, unsigned int keycode)
+			{
+				WindowData&	data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				KeyTypedEvent	event(keycode);
+				data.EventCallback(event);
+			});
+
 		glfwSetMouseButtonCallback(this->m_Window,
 			[](GLFWwindow* window, int button, int action, int mods)
 			{
@@ -175,6 +184,11 @@ namespace Engine
 	inline unsigned int	LinuxWindow::GetHeight() const
 	{
 		return this->m_Data.Height;
+	}
+
+	inline void*	LinuxWindow::GetNativeWindow() const
+	{
+		return ((void*)(this->m_Window));
 	}
 
 	void	LinuxWindow::SetVSync(bool enabled)

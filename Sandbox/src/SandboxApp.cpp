@@ -26,6 +26,7 @@ namespace Engine
 		Sandbox()
 		{
 			this->PushLayer(new ExampleLayer());
+			this->PushOverlay(new Engine::ImGuiLayer());
 		}
 		
 		~Sandbox()

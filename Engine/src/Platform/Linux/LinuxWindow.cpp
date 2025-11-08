@@ -188,7 +188,7 @@ namespace Engine
 
 	inline void*	LinuxWindow::GetNativeWindow() const
 	{
-		return ((void*)(this->m_Window));
+		return (this->m_Window);
 	}
 
 	void	LinuxWindow::SetVSync(bool enabled)

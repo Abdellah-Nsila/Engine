@@ -1,6 +1,7 @@
-#include "Engine/Core.h"
 #include "ImGuiLayer.h"
+#include "Engine/Core.h"
 #include "Engine/Application.h"
+#include "Engine/Input.h"
 
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
 
@@ -106,16 +107,16 @@ namespace Engine
 	{
 		ImGuiIO&	io = ImGui::GetIO();
 		ImGuiKey imguiKey = ImGuiLayer::MapToImGuiKey(e.GetKeyCode());
-
+		
 		io.AddKeyEvent(imguiKey, true);
-		io.AddKeyEvent(ImGuiMod_Ctrl, (glfwGetKey((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) ||
-        				(glfwGetKey((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS));
-		io.AddKeyEvent(ImGuiMod_Shift, (glfwGetKey((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) ||
-						(glfwGetKey((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS));
-		io.AddKeyEvent(ImGuiMod_Alt, (glfwGetKey((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_KEY_LEFT_ALT) == GLFW_PRESS) ||
-						(glfwGetKey((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_KEY_RIGHT_ALT) == GLFW_PRESS));
-		io.AddKeyEvent(ImGuiMod_Super, (glfwGetKey((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_KEY_LEFT_SUPER) == GLFW_PRESS) ||
-						(glfwGetKey((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow(), GLFW_KEY_RIGHT_SUPER) == GLFW_PRESS));
+		io.AddKeyEvent(ImGuiMod_Ctrl, (Input::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) ||
+        				(Input::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS));
+		io.AddKeyEvent(ImGuiMod_Shift, (Input::IsKeyPressed(GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) ||
+						(Input::IsKeyPressed(GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS));
+		io.AddKeyEvent(ImGuiMod_Alt, (Input::IsKeyPressed(GLFW_KEY_LEFT_ALT) == GLFW_PRESS) ||
+						(Input::IsKeyPressed(GLFW_KEY_RIGHT_ALT) == GLFW_PRESS));
+		io.AddKeyEvent(ImGuiMod_Super, (Input::IsKeyPressed(GLFW_KEY_LEFT_SUPER) == GLFW_PRESS) ||
+						(Input::IsKeyPressed(GLFW_KEY_RIGHT_SUPER) == GLFW_PRESS));
 
 		return (false);
 	}

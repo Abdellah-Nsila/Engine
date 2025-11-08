@@ -2,6 +2,7 @@
 #include "Engine/Core.h"
 #include "Engine/Application.h"
 #include "Engine/Events/ApplicationEvent.h"
+#include "Engine/Input.h"
 
 #include <glad/glad.h>
 
@@ -34,6 +35,12 @@ namespace Engine
 
 			for (Layer* layer : this->m_LayerStack)
 				layer->OnUpdate();
+
+				//Test Input Polling
+			auto[x, y] = Input::GetMousePosition();
+			ENGINE_CORE_TRACE("{0}, {1}", x, y);
+			auto state = Input::IsKeyPressed(65);
+			ENGINE_CORE_TRACE("{0}", state);
 
 			this->m_Window->OnUpdate();
 		}

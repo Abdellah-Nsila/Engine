@@ -13,7 +13,7 @@ extern Engine::Application* Engine::CreateApplication();
 	{
 		Engine::Log::Init();
 		ENGINE_CORE_WARN("Initialize Log!");
-		const char *s = "GG";
+		const char *s = "OpenGL";
 		ENGINE_INFO("Hello Client VAR={0}", s);
 	
 		auto app = Engine::CreateApplication();

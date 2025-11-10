@@ -1,4 +1,5 @@
 #include <Engine.h>
+#include <glm/glm.hpp>
 
 namespace Engine
 {
@@ -18,7 +19,6 @@ namespace Engine
 
 			void	OnEvent(Engine::Event& event) override
 			{
-				ENGINE_TRACE("ExampleLayer: " + event.ToString());
 				if (event.GetEventType() == Engine::EventType::KeyPressed)
 				{
 					Engine::KeyPressedEvent& e = (Engine::KeyPressedEvent&)event; 

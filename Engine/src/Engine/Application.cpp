@@ -36,12 +36,6 @@ namespace Engine
 			for (Layer* layer : this->m_LayerStack)
 				layer->OnUpdate();
 
-				//Test Input Polling
-			auto[x, y] = Input::GetMousePosition();
-			ENGINE_CORE_TRACE("{0}, {1}", x, y);
-			auto state = Input::IsKeyPressed(65);
-			ENGINE_CORE_TRACE("{0}", state);
-
 			this->m_Window->OnUpdate();
 		}
 	}

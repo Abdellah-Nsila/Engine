@@ -10,12 +10,23 @@ namespace Engine
 
 			void	OnUpdate() override
 			{
-				ENGINE_INFO("ExampleLayer: Update");
+				if (Input::IsKeyPressed(ENGINE_KEY_TAB))
+				{
+					ENGINE_TRACE("Tap key is pressed!");
+				}
 			}
 
 			void	OnEvent(Engine::Event& event) override
 			{
 				ENGINE_TRACE("ExampleLayer: " + event.ToString());
+				if (event.GetEventType() == Engine::EventType::KeyPressed)
+				{
+					Engine::KeyPressedEvent& e = (Engine::KeyPressedEvent&)event; 
+					if (e.GetKeyCode() == ENGINE_KEY_ESCAPE)
+					{
+						ENGINE_TRACE("Escape key is pressed!");
+					}
+				}
 			}
 	};
 

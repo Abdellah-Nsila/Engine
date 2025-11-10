@@ -6,3 +6,4 @@
 *.d
 *.gch
 *.o
+imgui.ini
